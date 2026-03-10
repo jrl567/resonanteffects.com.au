@@ -1,0 +1,224 @@
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: black;
+  font-family: system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 6rem;
+}
+
+/* --- THE LOGO & GLOWS --- */
+.logo-section {
+  position: relative;
+  display: flex;
+  place-items: center;
+  margin-bottom: 4rem;
+  z-index: 0;
+}
+
+.logo-img {
+  position: relative;
+  filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+  width: 180px;
+
+}
+
+/* The White Radial Glow (Centered but offset) */
+.glow-radial {
+  position: absolute;
+  z-index: -1;
+  height: 300px;
+  width: 100%;
+  max-width: 480px;
+  background: radial-gradient(circle, white, transparent 70%);
+  filter: blur(80px);
+  opacity: 0.15;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* The Blue Conic Glow (Offset to the right per original code) */
+.glow-conic {
+  position: absolute;
+  z-index: -2;
+  height: 180px;
+  width: 100%;
+  max-width: 240px;
+  background: conic-gradient(from 180deg at 50% 50%, #0141ff, #3290ff, #0141ff);
+  filter: blur(60px);
+  opacity: 0.4;
+  left: 50%;
+  /* This mimics the translate-x-1/3 from your source */
+  transform: translateX(33%); 
+}
+
+/* --- THE GRID (Tightened) --- */
+.link-grid {
+  display: grid;
+  width: auto; /* Removed 100% to let it shrink-wrap content */
+  max-width: 800px; /* Reduced from 1100px */
+  grid-template-columns: repeat(3, auto); /* Cards fit their content size */
+  gap: 1rem; /* Adds a small gap between the buttons */
+  margin-top: 2rem;
+}
+
+.nav-card {
+  padding: 0.75rem 1rem; /* Reduced padding for a smaller footprint */
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s, border 0.2s;
+  display: block;
+}
+
+.nav-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #333;
+}
+
+.nav-card h2 {
+  font-size: 1.25rem; /* Slightly smaller font */
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  white-space: nowrap; /* Keeps heading on one line */
+}
+
+/* Arrow Styling */
+.arrow {
+  display: inline-block;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: 4px;
+}
+
+.nav-card:hover .arrow {
+  transform: translateX(4px);
+}
+
+.nav-card p {
+  font-size: 0.8rem; /* Smaller subtext */
+  opacity: 0.5;
+  line-height: 1.4;
+  max-width: 22ch; /* Tighter text wrap to eliminate dead space */
+}
+
+/* Responsive: Stack buttons on smaller screens */
+@media (max-width: 850px) {
+  .link-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+  }
+  .nav-card p {
+    margin: 0 auto;
+  }
+}
+
+/* --- CONTACT PAGE SPECIFICS --- */
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-wrapper {
+    width: 100%;
+    max-width: 450px;
+    z-index: 1;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+}
+
+.input-group input, 
+.input-group textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.8rem;
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus, 
+.input-group textarea:focus {
+    outline: none;
+    border-color: #0141ff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.submit-btn {
+    background: white;
+    color: black;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.submit-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    font-size: 0.8rem;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.back-link:hover {
+    opacity: 1;
+}
