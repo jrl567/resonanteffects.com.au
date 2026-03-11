@@ -222,3 +222,128 @@ body {
 .back-link:hover {
     opacity: 1;
 }
+
+/* --- GALLERY GRID --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1100px;
+    z-index: 1;
+}
+
+.gallery-card {
+    position: relative;
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    background: #111;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-card:hover {
+    transform: scale(1.02);
+    border-color: #0141ff;
+}
+
+.thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.gallery-card:hover .thumb-img {
+    opacity: 0.4;
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 1.5rem;
+    color: white;
+}
+
+/* --- CSS-ONLY MODAL SYSTEM --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+/* This triggers when the URL ends in #pedal1 */
+.modal-overlay:target {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: #0a0a0a;
+    width: 90%;
+    max-width: 900px;
+    border: 1px solid #333;
+    border-radius: 16px;
+    position: relative;
+    padding: 2rem;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+    opacity: 0.5;
+}
+
+.close-btn:hover { opacity: 1; }
+
+.modal-body {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.modal-text h2 { margin-bottom: 1rem; }
+.pedal-desc { opacity: 0.7; line-height: 1.6; margin-bottom: 1rem; }
+.spec-list { list-style: none; opacity: 0.5; font-size: 0.9rem; }
+.spec-list li { margin-bottom: 0.5rem; }
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+    .modal-body { grid-template-columns: 1fr; }
+}
